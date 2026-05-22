@@ -25,26 +25,19 @@ export default function Admin() {
   async function loadUsers() {
     setLoading(true)
 
-    // Получаем всех пользователей через profiles
-    const { data: profiles } = await supabase
-      .from('profiles')
-      .select('user_id, role')
+    const { data, error } = await supabase.rpc('get_all_users')
 
-    if (!profiles) { setLoading(false); return }
+    if (error || !data) { setLoading(false); return }
 
-    // Получаем подписки
     const { data: subs } = await supabase
       .from('subscriptions')
       .select('*')
 
-    // Получаем текущего пользователя чтобы показать email
-    const { data: { user: currentUser } } = await supabase.auth.getUser()
-
-    const mapped: User[] = profiles.map(p => ({
-      id: p.user_id,
-      email: p.user_id === currentUser?.id ? (currentUser?.email ?? p.user_id) : p.user_id,
-      created_at: '',
-      subscription: subs?.find(s => s.user_id === p.user_id) ?? null,
+    const mapped: User[] = data.map((u: any) => ({
+      id: u.user_id,
+      email: u.email,
+      created_at: u.created_at,
+      subscription: subs?.find(s => s.user_id === u.user_id) ?? null,
     }))
 
     setUsers(mapped)
