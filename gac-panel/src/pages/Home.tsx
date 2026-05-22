@@ -160,7 +160,7 @@ export default function Home() {
           </div>
 
           {/* Правая часть — GAC окно */}
-          <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards', position: 'relative', top: '-40px', right: '80px' }}>
+          <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards', position: 'relative', top: '-40px', right: '160px' }}>
             <div className="h-gac-window">
               <div className="h-gac-titlebar">
                 <span className="h-gac-name">GAC</span>
