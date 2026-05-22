@@ -47,16 +47,12 @@ export default function Admin() {
   useEffect(() => { loadUsers() }, [])
 
 async function toggleBan(userId: string, currentStatus: string) {
-  console.log('toggleBan called', userId, currentStatus)
-  
   const isBanned = currentStatus === 'banned'
-  
-  const { error } = await supabase
-    .from('profiles')
-    .update({ banned: !isBanned })
-    .eq('user_id', userId)
 
-  console.log('update error:', error)
+  await supabase.rpc('ban_user', {
+    target_user_id: userId,
+    should_ban: !isBanned
+  })
 
   await supabase
     .from('subscriptions')
