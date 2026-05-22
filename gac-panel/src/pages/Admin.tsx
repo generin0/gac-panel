@@ -46,21 +46,25 @@ export default function Admin() {
 
   useEffect(() => { loadUsers() }, [])
 
-  async function toggleBan(userId: string, currentStatus: string) {
-    const isBanned = currentStatus === 'banned'
-    
-    await supabase
-      .from('profiles')
-      .update({ banned: !isBanned })
-      .eq('user_id', userId)
+async function toggleBan(userId: string, currentStatus: string) {
+  console.log('toggleBan called', userId, currentStatus)
+  
+  const isBanned = currentStatus === 'banned'
+  
+  const { error } = await supabase
+    .from('profiles')
+    .update({ banned: !isBanned })
+    .eq('user_id', userId)
 
-    await supabase
-      .from('subscriptions')
-      .update({ status: isBanned ? 'active' : 'banned' })
-      .eq('user_id', userId)
+  console.log('update error:', error)
 
-    loadUsers()
-  }
+  await supabase
+    .from('subscriptions')
+    .update({ status: isBanned ? 'active' : 'banned' })
+    .eq('user_id', userId)
+
+  loadUsers()
+}
 
   async function giveSubscription(userId: string) {
     const expires = new Date()
