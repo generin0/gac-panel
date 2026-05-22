@@ -16,13 +16,29 @@ export default function Login() {
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
-      setError('Wrong email or password')
-    } else {
-      navigate('/dashboard')
+      setError('Неверный email или пароль')
+      setLoading(false)
+      return
     }
+
+    // Проверяем бан
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('banned')
+      .eq('user_id', data.user.id)
+      .single()
+
+    if (profile?.banned) {
+      await supabase.auth.signOut()
+      setError('Этот аккаунт заблокирован')
+      setLoading(false)
+      return
+    }
+
+    navigate('/dashboard')
     setLoading(false)
   }
 

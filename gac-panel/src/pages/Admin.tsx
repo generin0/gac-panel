@@ -47,11 +47,18 @@ export default function Admin() {
   useEffect(() => { loadUsers() }, [])
 
   async function toggleBan(userId: string, currentStatus: string) {
-    const newStatus = currentStatus === 'banned' ? 'active' : 'banned'
+    const isBanned = currentStatus === 'banned'
+    
+    await supabase
+      .from('profiles')
+      .update({ banned: !isBanned })
+      .eq('user_id', userId)
+
     await supabase
       .from('subscriptions')
-      .update({ status: newStatus })
+      .update({ status: isBanned ? 'active' : 'banned' })
       .eq('user_id', userId)
+
     loadUsers()
   }
 
