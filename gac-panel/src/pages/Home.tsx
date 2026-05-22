@@ -133,27 +133,59 @@ export default function Home() {
       <section className="h-hero">
         <div className="h-hero-grid" />
         <div className="h-hero-orb" />
-        <div className="h-hero-content">
-          <div className="h-hero-tag">KERNEL-LEVEL ANTI-CHEAT SYSTEM</div>
-          <h1 className="h-hero-title">
-            <span className="line1">Genesis</span>
-            <span className="line2" data-text="AntiCheat">AntiCheat</span>
-          </h1>
-          <p className="h-hero-desc">
-            Driver-level anti-cheat with server infrastructure. Operates at the kernel level, launches alongside the client, controls the process at every layer.
-          </p>
-          <div className="h-hero-actions">
-            <button className="h-btn-primary" onClick={() => navigate(userEmail ? '/dashboard' : '/login')}>
-              {userEmail ? 'MY DASHBOARD' : 'GET STARTED'}
-            </button>
-            <button className="h-btn-secondary" onClick={() => document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' })}>
-              Architecture
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </button>
+        
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', position: 'relative', zIndex: 2 }}>
+          
+          {/* Левая часть */}
+          <div className="h-hero-content" style={{ maxWidth: 600 }}>
+            <div className="h-hero-tag">KERNEL-LEVEL ANTI-CHEAT SYSTEM</div>
+            <h1 className="h-hero-title">
+              <span className="line1">Genesis</span>
+              <span className="line2" data-text="AntiCheat">AntiCheat</span>
+            </h1>
+            <p className="h-hero-desc">
+              Driver-level anti-cheat with server infrastructure. Operates at the kernel level, launches alongside the client, controls the process at every layer.
+            </p>
+            <div className="h-hero-actions">
+              <button className="h-btn-primary" onClick={() => navigate(userEmail ? '/dashboard' : '/login')}>
+                {userEmail ? 'MY DASHBOARD' : 'GET STARTED'}
+              </button>
+              <button className="h-btn-secondary" onClick={() => document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' })}>
+                Architecture
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
+
+          {/* Правая часть — GAC окно */}
+          <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards' }}>
+            <div className="h-gac-window">
+              <div className="h-gac-titlebar">
+                <span className="h-gac-name">GAC</span>
+                <span className="h-gac-version">v1.0</span>
+                <div className="h-gac-close">✕</div>
+              </div>
+              <div className="h-gac-body">
+                <div className="h-gac-section-label">GAME INFO</div>
+                <div className="h-gac-info-row"><span className="h-gac-info-key">Game</span><span className={`h-gac-info-val ${gacGameClass}`}>{gacGame}</span></div>
+                <div className="h-gac-info-row"><span className="h-gac-info-key">PID</span><span className={`h-gac-info-val ${gacPidClass}`}>{gacPid}</span></div>
+                <div className="h-gac-info-row"><span className="h-gac-info-key">Status</span><span className={`h-gac-info-val ${gacStatusClass}`} style={{ color: gacStatusColor || '' }}>{gacStatus}</span></div>
+                <div className="h-gac-divider" />
+                <div className="h-gac-section-label">MODULES</div>
+                <div className="h-gac-module-row"><div className={`h-gac-dot ${dotAc}`} /><span className="h-gac-module-name">AC Engine</span><span className={`h-gac-module-status s-${dotAc === 'online' ? 'online' : 'offline'}`}>{stAc}</span></div>
+                <div className="h-gac-module-row"><div className={`h-gac-dot ${dotDll}`} /><span className="h-gac-module-name">Guard DLL</span><span className={`h-gac-module-status s-${dotDll === 'online' ? 'online' : 'offline'}`}>{stDll}</span></div>
+                <div className="h-gac-module-row"><div className={`h-gac-dot ${dotSrv}`} /><span className="h-gac-module-name">Server</span><span className={`h-gac-module-status s-${dotSrv === 'online' ? 'online' : 'offline'}`}>{stSrv}</span></div>
+                <div className="h-gac-module-row"><div className="h-gac-dot unloaded" /><span className="h-gac-module-name">Kernel Driver</span><span className="h-gac-module-status s-wip">UNLOADED</span></div>
+                <div className="h-gac-build">Build: <span style={{ color: '#22c55e', opacity: 0.7 }}>Release</span></div>
+                <button className="h-gac-btn" onClick={gacLaunch} style={{ color: btnColor || 'var(--green)', borderColor: btnColor || 'var(--green)' }}>{btnText}</button>
+              </div>
+            </div>
+          </div>
+
         </div>
+
         <div className="h-hero-stats">
           <div className="h-stat"><span className="h-stat-num">Ring 0</span><div className="h-stat-label">KERNEL DRIVER</div></div>
           <div className="h-stat"><span className="h-stat-num">x64</span><div className="h-stat-label">ARCHITECTURE</div></div>
@@ -314,40 +346,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* GAC MENU */}
-      <div className="h-gac-section">
-        <div style={{ textAlign: 'center' }} className="h-reveal">
-          <div className="h-section-label" style={{ justifyContent: 'center' }}>INTERFACE</div>
-          <h2 className="h-section-title">Client Menu</h2>
-          <p className="h-section-sub" style={{ margin: '12px auto 0', textAlign: 'center' }}>This is how GAC looks on launch — a minimalist overlay on top of the game.</p>
-        </div>
-        <div className="h-gac-window-wrap h-reveal h-reveal-d1">
-          <div className="h-gac-window">
-            <div className="h-gac-titlebar">
-              <span className="h-gac-name">GAC</span>
-              <span className="h-gac-version">v1.0</span>
-              <div className="h-gac-close">✕</div>
-            </div>
-            <div className="h-gac-body">
-              <div className="h-gac-section-label">GAME INFO</div>
-              <div className="h-gac-info-row"><span className="h-gac-info-key">Game</span><span className={`h-gac-info-val ${gacGameClass}`}>{gacGame}</span></div>
-              <div className="h-gac-info-row"><span className="h-gac-info-key">PID</span><span className={`h-gac-info-val ${gacPidClass}`}>{gacPid}</span></div>
-              <div className="h-gac-info-row"><span className="h-gac-info-key">Status</span><span className={`h-gac-info-val ${gacStatusClass}`} style={{ color: gacStatusColor || '' }}>{gacStatus}</span></div>
-              <div className="h-gac-divider" />
-              <div className="h-gac-section-label">MODULES</div>
-              <div className="h-gac-module-row"><div className={`h-gac-dot ${dotAc}`} /><span className="h-gac-module-name">AC Engine</span><span className={`h-gac-module-status s-${dotAc === 'online' ? 'online' : 'offline'}`}>{stAc}</span></div>
-              <div className="h-gac-module-row"><div className={`h-gac-dot ${dotDll}`} /><span className="h-gac-module-name">Guard DLL</span><span className={`h-gac-module-status s-${dotDll === 'online' ? 'online' : 'offline'}`}>{stDll}</span></div>
-              <div className="h-gac-module-row"><div className={`h-gac-dot ${dotSrv}`} /><span className="h-gac-module-name">Server</span><span className={`h-gac-module-status s-${dotSrv === 'online' ? 'online' : 'offline'}`}>{stSrv}</span></div>
-              <div className="h-gac-module-row"><div className="h-gac-dot unloaded" /><span className="h-gac-module-name">Kernel Driver</span><span className="h-gac-module-status s-wip">UNLOADED</span></div>
-              <div className="h-gac-build">Build: <span style={{ color: '#22c55e', opacity: 0.7 }}>Release</span></div>
-              <button className="h-gac-btn" onClick={gacLaunch} style={{ color: btnColor || 'var(--green)', borderColor: btnColor || 'var(--green)' }}>{btnText}</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="h-divider" />
 
       {/* CTA */}
       <section className="h-cta" id="contact">
