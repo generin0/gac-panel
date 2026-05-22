@@ -8,12 +8,14 @@ const plans = [
     name: 'Standard',
     price: '$5',
     period: '/mo',
-    color: '#22c55e',
+    badge: '+ BattleEye',
+    badgeColor: '#22c55e',
     features: [
       'Базовое сканирование процессов',
       'Сигнатурное сканирование',
       'Серверная верификация',
       'Онлайн / Оффлайн режим',
+      'Совместим с BattleEye',
     ],
     highlight: false,
   },
@@ -22,12 +24,14 @@ const plans = [
     name: 'Medium',
     price: '$10',
     period: '/mo',
-    color: '#22c55e',
+    badge: '+ BattleEye',
+    badgeColor: '#22c55e',
     features: [
       'Всё из Standard',
       'Поведенческий анализ',
       'Мониторинг целостности памяти',
       'Приоритетная поддержка',
+      'Совместим с BattleEye',
     ],
     highlight: true,
   },
@@ -36,13 +40,15 @@ const plans = [
     name: 'Advanced',
     price: '$20',
     period: '/mo',
-    color: '#22c55e',
+    badge: 'Standalone',
+    badgeColor: '#f59e0b',
     features: [
       'Всё из Medium',
       'Kernel Driver защита (скоро)',
       'Расширенная база сигнатур',
       'Прямой доступ к API',
       'Максимальный приоритет поддержки',
+      'Работает без BattleEye',
     ],
     highlight: false,
   },
@@ -94,6 +100,22 @@ export default function Subscription() {
               {/* Название */}
               <div style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 12 }}>
                 {plan.name.toUpperCase()}
+              </div>
+
+              {/* Бейдж совместимости */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                marginBottom: 16,
+                padding: '4px 10px',
+                border: `1px solid ${plan.badgeColor}30`,
+                background: `${plan.badgeColor}08`,
+              }}>
+                <div style={{ width: 5, height: 5, borderRadius: '50%', background: plan.badgeColor, flexShrink: 0 }} />
+                <span style={{ fontFamily: mono, fontSize: 10, color: plan.badgeColor, letterSpacing: '0.1em' }}>
+                  {plan.badge}
+                </span>
               </div>
 
               {/* Цена */}
