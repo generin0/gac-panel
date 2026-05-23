@@ -22,6 +22,8 @@ export default function Home() {
   const [btnText, setBtnText] = useState('[ LAUNCH GAME ]')
   const [btnColor, setBtnColor] = useState('')
   const [launched, setLaunched] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const mono = 'DM Mono, monospace'
   const barsAnimated = useRef(false)
 
   useEffect(() => {
@@ -58,28 +60,32 @@ export default function Home() {
   }, [])
 
   function gacLaunch() {
-    if (launched) return
-    setLaunched(true)
-    setBtnText('[ LAUNCHING... ]')
-    setBtnColor('#f59e0b')
-    setTimeout(() => { setGacStatus('Loading...'); setGacStatusColor('#f59e0b'); setGacStatusClass('') }, 400)
-    setTimeout(() => { setDotAc('online'); setStAc('ONLINE') }, 900)
-    setTimeout(() => { setDotDll('online'); setStDll('ONLINE') }, 1300)
-    setTimeout(() => { setDotSrv('online'); setStSrv('ONLINE') }, 1700)
-    setTimeout(() => {
-      setGacGame('game.exe'); setGacGameClass('active')
-      setGacPid('7842'); setGacPidClass('active')
-      setGacStatus('Protected'); setGacStatusColor(''); setGacStatusClass('active')
-      setBtnText('[ GAME RUNNING ]'); setBtnColor('var(--green)')
-    }, 2100)
-    setTimeout(() => {
-      setBtnText('[ LAUNCH GAME ]'); setBtnColor(''); setLaunched(false)
+    if (launched) {
+      // STOP
+      setBtnText('[ LAUNCH GAME ]')
+      setBtnColor('')
+      setLaunched(false)
       setDotAc('offline'); setDotDll('offline'); setDotSrv('offline')
       setStAc('OFFLINE'); setStDll('OFFLINE'); setStSrv('OFFLINE')
       setGacGame('---'); setGacGameClass('idle')
       setGacPid('---'); setGacPidClass('idle')
       setGacStatus('Idle'); setGacStatusColor(''); setGacStatusClass('idle')
-    }, 6000)
+      return
+    }
+
+    setLaunched(true)
+    setBtnText('[ LAUNCHING... ]')
+    setBtnColor('#f59e0b')
+    setTimeout(() => { setGacStatus('Loading...'); setGacStatusColor('#f59e0b'); setGacStatusClass('') }, 400)
+    setTimeout(() => { setDotAc('online'); setStAc('ACTIVE') }, 900)
+    setTimeout(() => { setDotDll('online'); setStDll('INJECTED') }, 1300)
+    setTimeout(() => { setDotSrv('online'); setStSrv('ONLINE') }, 1700)
+    setTimeout(() => {
+      setGacGame('Unturned.exe'); setGacGameClass('active')
+      setGacPid('7842'); setGacPidClass('active')
+      setGacStatus('Protected'); setGacStatusColor(''); setGacStatusClass('active')
+      setBtnText('[ STOP ]'); setBtnColor('rgba(180,50,50,1)')
+    }, 2100)
   }
 
   return (
@@ -160,13 +166,42 @@ export default function Home() {
           </div>
 
           {/* Правая часть — GAC окно */}
-          <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards', position: 'relative', top: '-40px', right: '200px' }}>
-            <div className="h-gac-window">
+          <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards' }}>
+            <div className="h-gac-window" style={{ borderRadius: 16, overflow: 'hidden' }}>
               <div className="h-gac-titlebar">
                 <span className="h-gac-name">GAC</span>
-                <span className="h-gac-version">v1.0</span>
-                <div className="h-gac-close">✕</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <button
+                    onClick={() => setSettingsOpen(v => !v)}
+                    style={{
+                      width: 24, height: 24, background: settingsOpen ? 'rgba(20,45,30,1)' : 'rgba(30,30,30,1)',
+                      border: `1px solid ${settingsOpen ? '#22c55e' : '#252525'}`,
+                      color: settingsOpen ? '#22c55e' : '#646464',
+                      fontFamily: mono, fontSize: 12, cursor: 'pointer',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      transition: 'all .2s', borderRadius: 3,
+                    }}
+                  >=</button>
+                  <div className="h-gac-close">✕</div>
+                </div>
               </div>
+
+              {/* Settings panel */}
+              {settingsOpen && (
+                <div style={{ padding: '10px 14px', borderBottom: '1px solid #1a2618' }}>
+                  <div style={{ fontFamily: mono, fontSize: 9, color: '#373737', letterSpacing: '0.16em', marginBottom: 8 }}>SETTINGS</div>
+                  <button style={{
+                    width: '100%', background: 'rgba(30,10,10,1)', border: '1px solid rgba(140,35,35,1)',
+                    color: 'rgba(180,50,50,1)', fontFamily: mono, fontSize: 11,
+                    letterSpacing: '0.1em', padding: '6px', cursor: 'pointer', borderRadius: 3,
+                    transition: 'all .2s',
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(55,15,15,1)'; e.currentTarget.style.color = 'rgba(230,70,70,1)' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(30,10,10,1)'; e.currentTarget.style.color = 'rgba(180,50,50,1)' }}
+                  >[ UNLOAD GAC ]</button>
+                </div>
+              )}
+
               <div className="h-gac-body">
                 <div className="h-gac-section-label">GAME INFO</div>
                 <div className="h-gac-info-row"><span className="h-gac-info-key">Game</span><span className={`h-gac-info-val ${gacGameClass}`}>{gacGame}</span></div>
@@ -174,12 +209,22 @@ export default function Home() {
                 <div className="h-gac-info-row"><span className="h-gac-info-key">Status</span><span className={`h-gac-info-val ${gacStatusClass}`} style={{ color: gacStatusColor || '' }}>{gacStatus}</span></div>
                 <div className="h-gac-divider" />
                 <div className="h-gac-section-label">MODULES</div>
-                <div className="h-gac-module-row"><div className={`h-gac-dot ${dotAc}`} /><span className="h-gac-module-name">AC Engine</span><span className={`h-gac-module-status s-${dotAc === 'online' ? 'online' : 'offline'}`}>{stAc}</span></div>
+                <div className="h-gac-module-row"><div className={`h-gac-dot ${dotAc}`} /><span className="h-gac-module-name">GAC Engine</span><span className={`h-gac-module-status s-${dotAc === 'online' ? 'online' : 'offline'}`}>{stAc}</span></div>
                 <div className="h-gac-module-row"><div className={`h-gac-dot ${dotDll}`} /><span className="h-gac-module-name">Guard DLL</span><span className={`h-gac-module-status s-${dotDll === 'online' ? 'online' : 'offline'}`}>{stDll}</span></div>
                 <div className="h-gac-module-row"><div className={`h-gac-dot ${dotSrv}`} /><span className="h-gac-module-name">Server</span><span className={`h-gac-module-status s-${dotSrv === 'online' ? 'online' : 'offline'}`}>{stSrv}</span></div>
                 <div className="h-gac-module-row"><div className="h-gac-dot unloaded" /><span className="h-gac-module-name">Kernel Driver</span><span className="h-gac-module-status s-wip">UNLOADED</span></div>
-                <div className="h-gac-build">Build: <span style={{ color: '#22c55e', opacity: 0.7 }}>Release</span></div>
-                <button className="h-gac-btn" onClick={gacLaunch} style={{ color: btnColor || 'var(--green)', borderColor: btnColor || 'var(--green)' }}>{btnText}</button>
+                <div className="h-gac-build">Build: <span style={{ color: '#22c55e', opacity: 0.7 }}>Release v1.6r</span></div>
+                <button
+                  className="h-gac-btn"
+                  onClick={gacLaunch}
+                  style={{
+                    color: launched ? 'rgba(180,50,50,1)' : (btnColor || 'var(--green)'),
+                    borderColor: launched ? 'rgba(160,40,40,1)' : (btnColor || 'var(--green)'),
+                    background: launched ? 'rgba(30,10,10,1)' : 'transparent',
+                  }}
+                >
+                  {btnText}
+                </button>
               </div>
             </div>
           </div>
