@@ -14,16 +14,16 @@ export default function Options() {
 
       <div style={{ marginLeft: 220, flex: 1, padding: '32px 40px', position: 'relative' }}>
         <div style={{ marginBottom: 32, borderBottom: '1px solid #1f2e22', paddingBottom: 24 }}>
-          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>НАСТРОЙКИ</p>
+          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>SETTINGS</p>
           <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: 28, fontWeight: 700, color: '#e8f0ea', letterSpacing: '-0.02em' }}>Options</h1>
         </div>
 
         <div style={{ background: '#0c110e', border: '1px solid #1f2e22', padding: '48px', textAlign: 'center' }}>
           <div style={{ fontFamily: mono, fontSize: 11, color: '#3d5040', letterSpacing: '0.12em', marginBottom: 12 }}>
-            В РАЗРАБОТКЕ
+            IN DEVELOPMENT
           </div>
           <p style={{ fontFamily: mono, fontSize: 12, color: '#5a7060' }}>
-            Раздел настроек появится в ближайших обновлениях.
+            The settings section will appear in upcoming updates.
           </p>
         </div>
       </div>

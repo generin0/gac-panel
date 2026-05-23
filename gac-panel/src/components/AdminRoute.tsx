@@ -31,7 +31,7 @@ export default function AdminRoute({ children }: { children: React.ReactNode }) 
   if (loading) return (
     <div style={{ minHeight: '100vh', background: '#080c0a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <span style={{ fontFamily: 'DM Mono, monospace', fontSize: 12, color: '#5a7060', letterSpacing: '0.12em' }}>
-        ПРОВЕРКА ДОСТУПА...
+        CHECKING ACCESS...
       </span>
     </div>
   )

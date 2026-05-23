@@ -43,15 +43,15 @@ export default function Register() {
   if (success) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#080c0a' }}>
       <div style={{ background: '#0c110e', border: '1px solid #1f2e22', padding: 40, maxWidth: 380, width: '100%', margin: '0 16px' }}>
-        <div style={{ fontFamily: mono, fontSize: 11, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 16 }}>— АККАУНТ СОЗДАН</div>
+        <div style={{ fontFamily: mono, fontSize: 11, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 16 }}>— ACCOUNT CREATED</div>
         <p style={{ fontFamily: mono, fontSize: 12, color: '#9ab09e', lineHeight: 1.7, marginBottom: 24 }}>
-          На почту <span style={{ color: '#22c55e' }}>{email}</span> отправлено письмо с подтверждением. Перейди по ссылке в письме и войди в аккаунт.
+          A confirmation email has been sent to <span style={{ color: '#22c55e' }}>{email}</span>. Click the link in the email and log in to your account.
         </p>
         <button
           onClick={() => navigate('/login')}
           style={{ width: '100%', background: 'transparent', border: '1px solid #22c55e', color: '#22c55e', fontFamily: mono, fontSize: 12, letterSpacing: '0.14em', padding: '12px', cursor: 'pointer' }}
         >
-          [ ВОЙТИ ]
+          [ LOGIN ]
         </button>
       </div>
     </div>
@@ -76,12 +76,12 @@ export default function Register() {
               Genesis <span style={{ color: '#22c55e' }}>AC</span>
             </span>
           </div>
-          <p style={{ fontFamily: mono, fontSize: 11, color: '#5a7060', letterSpacing: '0.12em' }}>ЛИЧНЫЙ КАБИНЕТ</p>
+          <p style={{ fontFamily: mono, fontSize: 11, color: '#5a7060', letterSpacing: '0.12em' }}>PERSONAL ACCOUNT</p>
         </div>
 
         <div style={{ background: '#0c110e', border: '1px solid #1f2e22' }} className="p-8">
           <div style={{ fontFamily: mono, fontSize: 11, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 24 }}>
-            — РЕГИСТРАЦИЯ
+            — REGISTRATION
           </div>
 
           <div className="mb-4">
@@ -98,7 +98,7 @@ export default function Register() {
           </div>
 
           <div className="mb-4">
-            <label style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.1em', display: 'block', marginBottom: 6 }}>ПАРОЛЬ</label>
+            <label style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.1em', display: 'block', marginBottom: 6 }}>PASSWORD</label>
             <input
               type="password"
               value={password}
@@ -111,7 +111,7 @@ export default function Register() {
           </div>
 
           <div className="mb-6">
-            <label style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.1em', display: 'block', marginBottom: 6 }}>ПОДТВЕРДИ ПАРОЛЬ</label>
+            <label style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.1em', display: 'block', marginBottom: 6 }}>CONFIRM PASSWORD</label>
             <input
               type="password"
               value={confirm}
@@ -122,7 +122,7 @@ export default function Register() {
               onBlur={e => e.target.style.borderColor = confirm && confirm !== password ? 'rgba(239,68,68,0.5)' : '#1f2e22'}
             />
             {confirm && confirm !== password && (
-              <p style={{ fontFamily: mono, fontSize: 10, color: 'rgba(239,68,68,0.7)', marginTop: 4 }}>Пароли не совпадают</p>
+              <p style={{ fontFamily: mono, fontSize: 10, color: 'rgba(239,68,68,0.7)', marginTop: 4 }}>Passwords do not match</p>
             )}
           </div>
 
@@ -155,12 +155,12 @@ export default function Register() {
           </button>
 
           <div className="text-center mt-4">
-            <span style={{ fontFamily: mono, fontSize: 11, color: '#5a7060' }}>Уже есть аккаунт? </span>
+            <span style={{ fontFamily: mono, fontSize: 11, color: '#5a7060' }}>Already have an account? </span>
             <button
               onClick={() => navigate('/login')}
               style={{ fontFamily: mono, fontSize: 11, color: '#22c55e', background: 'none', border: 'none', cursor: 'pointer' }}
             >
-              Войти
+              Login
             </button>
           </div>
         </div>

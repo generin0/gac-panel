@@ -27,7 +27,7 @@ export default function Home() {
   const barsAnimated = useRef(false)
 
   useEffect(() => {
-    // Проверяем сессию
+    // Check session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user?.email) setUserEmail(session.user.email)
     })
@@ -142,7 +142,7 @@ export default function Home() {
         
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', position: 'relative', zIndex: 2 }}>
           
-          {/* Левая часть */}
+          {/* Left side */}
           <div className="h-hero-content" style={{ maxWidth: 600 }}>
             <div className="h-hero-tag">KERNEL-LEVEL ANTI-CHEAT SYSTEM</div>
             <h1 className="h-hero-title">
@@ -165,7 +165,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Средняя часть — ключевые фичи */}
+          {/* Middle — key features */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, opacity: 0, animation: 'fade-up .8s .5s forwards' }}>
             {[
               { num: '01', title: 'Kernel-level Protection', desc: 'Operates at Ring 0, inaccessible to userspace cheats' },
@@ -193,7 +193,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Правая часть — GAC окно */}
+          {/* Right side — GAC window */}
           <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards' }}>
             <div className="h-gac-window" style={{ borderRadius: 16, overflow: 'hidden' }}>
               <div className="h-gac-titlebar">

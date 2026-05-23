@@ -20,40 +20,40 @@ const planDetails: Record<string, {
     name: 'Standard',
     color: '#22c55e',
     features: [
-      'Базовое сканирование процессов',
-      'Сигнатурное сканирование',
-      'Серверная верификация',
-      'Онлайн / Оффлайн режим',
+      'Basic process scanning',
+      'Signature scanning',
+      'Server verification',
+      'Online / Offline mode',
     ],
   },
   medium: {
     name: 'Medium',
     color: '#22c55e',
     features: [
-      'Базовое сканирование процессов',
-      'Сигнатурное сканирование',
-      'Серверная верификация',
-      'Онлайн / Оффлайн режим',
-      'Поведенческий анализ',
-      'Мониторинг целостности памяти',
-      'Приоритетная поддержка',
+      'Basic process scanning',
+      'Signature scanning',
+      'Server verification',
+      'Online / Offline mode',
+      'Behavioral analysis',
+      'Memory integrity monitoring',
+      'Priority support',
     ],
   },
   advanced: {
     name: 'Advanced',
     color: '#22c55e',
     features: [
-      'Базовое сканирование процессов',
-      'Сигнатурное сканирование',
-      'Серверная верификация',
-      'Онлайн / Оффлайн режим',
-      'Поведенческий анализ',
-      'Мониторинг целостности памяти',
-      'Приоритетная поддержка',
-      'Kernel Driver защита (скоро)',
-      'Расширенная база сигнатур',
-      'Прямой доступ к API',
-      'Максимальный приоритет поддержки',
+      'Basic process scanning',
+      'Signature scanning',
+      'Server verification',
+      'Online / Offline mode',
+      'Behavioral analysis',
+      'Memory integrity monitoring',
+      'Priority support',
+      'Kernel Driver protection (coming soon)',
+      'Extended signature database',
+      'Direct API access',
+      'Maximum priority support',
     ],
   },
 }
@@ -97,35 +97,35 @@ export default function License() {
 
       <div style={{ marginLeft: 220, flex: 1, padding: '32px 40px', position: 'relative' }}>
 
-        {/* Хедер */}
+        {/* Header */}
         <div style={{ marginBottom: 32, borderBottom: '1px solid #1f2e22', paddingBottom: 24 }}>
-          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>ЛИЦЕНЗИЯ</p>
+          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>LICENSE</p>
           <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: 28, fontWeight: 700, color: '#e8f0ea', letterSpacing: '-0.02em' }}>License</h1>
         </div>
 
         {loading ? (
-          <div style={{ fontFamily: mono, fontSize: 12, color: '#5a7060' }}>ЗАГРУЗКА...</div>
+          <div style={{ fontFamily: mono, fontSize: 12, color: '#5a7060' }}>LOADING...</div>
         ) : !sub || !isActive ? (
-          /* Нет подписки */
+          /* No subscription */
           <div style={{ background: '#0c110e', border: '1px solid #1f2e22', padding: '48px', textAlign: 'center' }}>
-            <div style={{ fontFamily: mono, fontSize: 11, color: '#3d5040', letterSpacing: '0.12em', marginBottom: 16 }}>НЕТ АКТИВНОЙ ЛИЦЕНЗИИ</div>
+            <div style={{ fontFamily: mono, fontSize: 11, color: '#3d5040', letterSpacing: '0.12em', marginBottom: 16 }}>NO ACTIVE LICENSE</div>
             <p style={{ fontFamily: mono, fontSize: 12, color: '#5a7060', marginBottom: 24 }}>
-              У вас нет активной подписки. Перейдите в раздел Subscription чтобы выбрать тариф.
+              You have no active subscription. Go to the Subscription section to choose a plan.
             </p>
             <div style={{ width: 48, height: 1, background: '#1f2e22', margin: '0 auto' }} />
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#1f2e22', border: '1px solid #1f2e22' }}>
 
-            {/* Левая колонка — детали лицензии */}
+            {/* Left column — license details */}
             <div style={{ background: '#0c110e', padding: '28px 24px' }}>
-              <p style={{ fontFamily: mono, fontSize: 10, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 20 }}>— ДЕТАЛИ ЛИЦЕНЗИИ</p>
+              <p style={{ fontFamily: mono, fontSize: 10, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 20 }}>— LICENSE DETAILS</p>
 
               {[
-                { key: 'Тариф', val: plan?.name ?? sub.plan },
-                { key: 'Статус', val: isActive ? 'Активна' : 'Неактивна', color: isActive ? '#22c55e' : '#5a7060' },
-                { key: 'Осталось дней', val: daysLeft !== null ? String(daysLeft) : '—' },
-                { key: 'Истекает', val: sub.expires_at ? new Date(sub.expires_at).toLocaleDateString('ru-RU') : '—' },
+                { key: 'Plan', val: plan?.name ?? sub.plan },
+                { key: 'Status', val: isActive ? 'Active' : 'Inactive', color: isActive ? '#22c55e' : '#5a7060' },
+                { key: 'Days Left', val: daysLeft !== null ? String(daysLeft) : '—' },
+                { key: 'Expires', val: sub.expires_at ? new Date(sub.expires_at).toLocaleDateString('en-US') : '—' },
               ].map(row => (
                 <div key={row.key} style={{ display: 'flex', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #1a2618' }}>
                   <span style={{ fontFamily: mono, fontSize: 12, color: '#5a7060', width: 160 }}>{row.key}</span>
@@ -133,9 +133,9 @@ export default function License() {
                 </div>
               ))}
 
-              {/* Ключ */}
+              {/* Key */}
               <div style={{ display: 'flex', alignItems: 'center', padding: '10px 0' }}>
-                <span style={{ fontFamily: mono, fontSize: 12, color: '#5a7060', width: 160 }}>Лицензионный ключ</span>
+                <span style={{ fontFamily: mono, fontSize: 12, color: '#5a7060', width: 160 }}>License Key</span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ fontFamily: mono, fontSize: 12, color: '#9ab09e', letterSpacing: '0.04em' }}>
                     {showKey ? sub.license_key : maskedKey}
@@ -150,15 +150,15 @@ export default function License() {
                     onMouseEnter={e => { e.currentTarget.style.borderColor = '#22c55e'; e.currentTarget.style.color = '#22c55e' }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = '#1f2e22'; e.currentTarget.style.color = '#5a7060' }}
                   >
-                    {showKey ? 'СКРЫТЬ' : 'ПОКАЗАТЬ'}
+                    {showKey ? 'HIDE' : 'SHOW'}
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Правая колонка — включённые функции */}
+            {/* Right column — enabled features */}
             <div style={{ background: '#0c110e', padding: '28px 24px' }}>
-              <p style={{ fontFamily: mono, fontSize: 10, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 20 }}>— ВКЛЮЧЕНО В ТАРИФ</p>
+              <p style={{ fontFamily: mono, fontSize: 10, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 20 }}>— INCLUDED IN PLAN</p>
               {plan?.features.map((f, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 14 }}>
                   <div style={{ width: 5, height: 5, background: '#22c55e', borderRadius: '50%', marginTop: 6, flexShrink: 0 }} />

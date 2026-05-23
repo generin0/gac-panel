@@ -64,7 +64,7 @@ export default function Sidebar() {
           onMouseEnter={e => { e.currentTarget.style.borderColor = '#22c55e'; e.currentTarget.style.color = '#22c55e' }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = '#1f2e22'; e.currentTarget.style.color = '#5a7060' }}
         >
-          [ ГЛАВНАЯ ]
+          [ HOME ]
         </button>
         <button
           onClick={async () => { await supabase.auth.signOut(); navigate('/login') }}
@@ -76,7 +76,7 @@ export default function Sidebar() {
           onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(239,68,68,0.4)'; e.currentTarget.style.color = 'rgba(239,68,68,0.7)' }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = '#1f2e22'; e.currentTarget.style.color = '#5a7060' }}
         >
-          [ ВЫЙТИ ]
+          [ LOGOUT ]
         </button>
       </div>
     </div>

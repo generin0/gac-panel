@@ -98,7 +98,7 @@ async function toggleBan(userId: string, currentStatus: string) {
         backgroundSize: '48px 48px',
       }} />
 
-      {/* Сайдбар */}
+      {/* Sidebar */}
       <div style={{ width: 220, background: '#0c110e', borderRight: '1px solid #1f2e22', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, bottom: 0, zIndex: 10 }}>
         <div style={{ padding: '24px 20px', borderBottom: '1px solid #1f2e22' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -152,24 +152,24 @@ async function toggleBan(userId: string, currentStatus: string) {
               e.currentTarget.style.color = '#5a7060'
             }}
           >
-            [ ВЫЙТИ ]
+            [ LOGOUT ]
           </button>
         </div>
       </div>
 
-      {/* Контент */}
+      {/* Content */}
       <div style={{ marginLeft: 220, flex: 1, padding: '32px 40px', position: 'relative' }}>
 
         <div style={{ marginBottom: 32, borderBottom: '1px solid #1f2e22', paddingBottom: 24 }}>
           <p style={{ fontFamily: mono, fontSize: 10, color: 'rgba(239,68,68,0.5)', letterSpacing: '0.15em', marginBottom: 4 }}>
-            АДМИНИСТРАТИВНАЯ ПАНЕЛЬ
+            ADMIN PANEL
           </p>
           <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: 28, fontWeight: 700, color: '#e8f0ea', letterSpacing: '-0.02em' }}>
-            Управление
+            Management
           </h1>
         </div>
 
-        {/* Статистика */}
+        {/* Statistics */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: '#1f2e22', border: '1px solid #1f2e22', marginBottom: 24 }}>
           {stats.map(s => (
             <div key={s.label} style={{ background: '#0c110e', padding: '20px 24px' }}>
@@ -179,7 +179,7 @@ async function toggleBan(userId: string, currentStatus: string) {
           ))}
         </div>
 
-        {/* Поиск */}
+        {/* Search */}
         <div style={{ marginBottom: 16 }}>
           <input
             value={search}
@@ -195,7 +195,7 @@ async function toggleBan(userId: string, currentStatus: string) {
           />
         </div>
 
-        {/* Таблица */}
+        {/* Table */}
         <div style={{ background: '#0c110e', border: '1px solid #1f2e22' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', padding: '12px 20px', borderBottom: '1px solid #1f2e22' }}>
             {['USER', 'STATUS', 'PLAN', 'EXPIRE', 'ACTIONS'].map(h => (
@@ -205,16 +205,16 @@ async function toggleBan(userId: string, currentStatus: string) {
 
           {loading ? (
             <div style={{ padding: '32px', textAlign: 'center', fontFamily: mono, fontSize: 12, color: '#3d4f40' }}>
-              ЗАГРУЗКА...
+              LOADING...
             </div>
           ) : filtered.length === 0 ? (
             <div style={{ padding: '32px', textAlign: 'center', fontFamily: mono, fontSize: 12, color: '#3d4f40' }}>
-              Пользователи не найдены
+              No users found
             </div>
           ) : filtered.map(user => {
             const status = user.subscription?.status ?? 'none'
             const expires = user.subscription?.expires_at
-              ? new Date(user.subscription.expires_at).toLocaleDateString('ru-RU')
+              ? new Date(user.subscription.expires_at).toLocaleDateString('en-US')
               : '—'
 
             return (
@@ -241,7 +241,7 @@ async function toggleBan(userId: string, currentStatus: string) {
                 <span style={{ fontFamily: mono, fontSize: 11, color: '#5a7060' }}>{expires}</span>
 
                 <div style={{ display: 'flex', gap: 6 }}>
-                  {/* Выдать подписку */}
+                  {/* Give subscription */}
                   <button
                     onClick={() => giveSubscription(user.id)}
                     style={{

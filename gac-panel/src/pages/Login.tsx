@@ -19,12 +19,12 @@ export default function Login() {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
-      setError('Неверный email или пароль')
+      setError('Invalid email or password')
       setLoading(false)
       return
     }
 
-    // Проверяем бан
+    // Check ban
     const { data: profile } = await supabase
       .from('profiles')
       .select('banned')
@@ -33,7 +33,7 @@ export default function Login() {
 
     if (profile?.banned) {
       await supabase.auth.signOut()
-      setError('Этот аккаунт заблокирован')
+      setError('This account has been blocked')
       setLoading(false)
       return
     }
@@ -78,7 +78,7 @@ export default function Login() {
 
         <div style={{ background: '#0c110e', border: '1px solid #1f2e22' }} className="p-8">
           <div style={{ fontFamily: mono, fontSize: 11, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 24 }}>
-            — ВХОД В СИСТЕМУ
+            — LOGIN
           </div>
 
           <div className="mb-4">
@@ -95,7 +95,7 @@ export default function Login() {
           </div>
 
           <div className="mb-6">
-            <label style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.1em', display: 'block', marginBottom: 6 }}>ПАРОЛЬ</label>
+            <label style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.1em', display: 'block', marginBottom: 6 }}>PASSWORD</label>
             <input
               type="password"
               value={password}
@@ -149,7 +149,7 @@ export default function Login() {
               onClick={() => navigate('/register')}
               style={{ fontFamily: mono, fontSize: 11, color: '#22c55e', background: 'none', border: 'none', cursor: 'pointer' }}
             >
-              Регистрация
+              Register
             </button>
           </div>
         </div>

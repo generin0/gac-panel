@@ -11,11 +11,11 @@ const plans = [
     badge: '+ BattleEye',
     badgeColor: '#22c55e',
     features: [
-      'Базовое сканирование процессов',
-      'Сигнатурное сканирование',
-      'Серверная верификация',
-      'Онлайн / Оффлайн режим',
-      'Совместим с BattleEye',
+      'Basic process scanning',
+      'Signature scanning',
+      'Server verification',
+      'Online / Offline mode',
+      'Compatible with BattleEye',
     ],
     highlight: false,
   },
@@ -27,11 +27,11 @@ const plans = [
     badge: '+ BattleEye',
     badgeColor: '#22c55e',
     features: [
-      'Всё из Standard',
-      'Поведенческий анализ',
-      'Мониторинг целостности памяти',
-      'Приоритетная поддержка',
-      'Совместим с BattleEye',
+      'Everything from Standard',
+      'Behavioral analysis',
+      'Memory integrity monitoring',
+      'Priority support',
+      'Compatible with BattleEye',
     ],
     highlight: true,
   },
@@ -43,12 +43,12 @@ const plans = [
     badge: 'Standalone',
     badgeColor: '#f59e0b',
     features: [
-      'Всё из Medium',
-      'Kernel Driver защита (скоро)',
-      'Расширенная база сигнатур',
-      'Прямой доступ к API',
-      'Максимальный приоритет поддержки',
-      'Работает без BattleEye',
+      'Everything from Medium',
+      'Kernel Driver protection (coming soon)',
+      'Extended signature database',
+      'Direct API access',
+      'Maximum priority support',
+      'Works without BattleEye',
     ],
     highlight: false,
   },
@@ -66,13 +66,13 @@ export default function Subscription() {
 
       <div style={{ marginLeft: 220, flex: 1, padding: '32px 40px', position: 'relative' }}>
 
-        {/* Хедер */}
+        {/* Header */}
         <div style={{ marginBottom: 48, borderBottom: '1px solid #1f2e22', paddingBottom: 24 }}>
-          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>ТАРИФЫ</p>
+          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>PRICING PLANS</p>
           <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: 28, fontWeight: 700, color: '#e8f0ea', letterSpacing: '-0.02em' }}>Subscription</h1>
         </div>
 
-        {/* Карточки тарифов */}
+        {/* Pricing Cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: '#1f2e22', border: '1px solid #1f2e22' }}>
           {plans.map(plan => (
             <div
@@ -97,12 +97,12 @@ export default function Subscription() {
                 </div>
               )}
 
-              {/* Название */}
+              {/* Name */}
               <div style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 12 }}>
                 {plan.name.toUpperCase()}
               </div>
 
-              {/* Бейдж совместимости */}
+              {/* Compatibility Badge */}
               <div style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -118,7 +118,7 @@ export default function Subscription() {
                 </span>
               </div>
 
-              {/* Цена */}
+              {/* Price */}
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 28 }}>
                 <span style={{ fontFamily: 'Syne, sans-serif', fontSize: 40, fontWeight: 800, color: '#e8f0ea', lineHeight: 1 }}>
                   {plan.price}
@@ -126,10 +126,10 @@ export default function Subscription() {
                 <span style={{ fontFamily: mono, fontSize: 12, color: '#5a7060' }}>{plan.period}</span>
               </div>
 
-              {/* Разделитель */}
+              {/* Divider */}
               <div style={{ height: 1, background: '#1f2e22', marginBottom: 24 }} />
 
-              {/* Фичи */}
+              {/* Features */}
               <div style={{ flex: 1, marginBottom: 28 }}>
                 {plan.features.map((f, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 12 }}>
@@ -139,7 +139,7 @@ export default function Subscription() {
                 ))}
               </div>
 
-              {/* Кнопка */}
+              {/* Button */}
               <button
                 style={{
                   width: '100%', background: 'transparent',
@@ -150,19 +150,19 @@ export default function Subscription() {
                   opacity: 0.6, transition: 'all .2s',
                 }}
                 disabled
-                title="Скоро"
+                title="Coming soon"
               >
-                [ СКОРО ]
+                [ COMING SOON ]
               </button>
 
             </div>
           ))}
         </div>
 
-        {/* Заметка */}
+        {/* Note */}
         <div style={{ marginTop: 24, padding: '16px 20px', border: '1px solid #1f2e22', background: '#0c110e' }}>
           <p style={{ fontFamily: mono, fontSize: 11, color: '#3d5040', letterSpacing: '0.06em' }}>
-            — Покупка подписок будет доступна в ближайшее время. Следите за обновлениями в нашем <a href="https://discord.gg/4cmNcDk37X" target="_blank" style={{ color: '#5a7060', textDecoration: 'none' }}>Discord</a>.
+            — Subscription purchases will be available soon. Keep up with updates on our <a href="https://discord.gg/4cmNcDk37X" target="_blank" style={{ color: '#5a7060', textDecoration: 'none' }}>Discord</a>.
           </p>
         </div>
 

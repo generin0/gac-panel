@@ -22,7 +22,7 @@ export default function Dashboard() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
       setEmail(user.email ?? '')
-      setCreatedAt(new Date(user.created_at).toLocaleDateString('ru-RU'))
+      setCreatedAt(new Date(user.created_at).toLocaleDateString('en-US'))
       const { data } = await supabase
         .from('subscriptions')
         .select('*')
@@ -51,25 +51,25 @@ export default function Dashboard() {
 
       <div style={{ marginLeft: 220, flex: 1, padding: '32px 40px', position: 'relative' }}>
         <div style={{ marginBottom: 32, borderBottom: '1px solid #1f2e22', paddingBottom: 24 }}>
-          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>ДОБРО ПОЖАЛОВАТЬ</p>
+          <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.15em', marginBottom: 4 }}>WELCOME</p>
           <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: 28, fontWeight: 700, color: '#e8f0ea', letterSpacing: '-0.02em' }}>Inspect</h1>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: '#1f2e22', border: '1px solid #1f2e22', marginBottom: 24 }}>
           <div style={{ background: '#0c110e', padding: '20px 24px' }}>
-            <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.12em', marginBottom: 8 }}>СТАТУС ПОДПИСКИ</p>
+            <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.12em', marginBottom: 8 }}>SUBSCRIPTION STATUS</p>
             <p style={{ fontFamily: mono, fontSize: 18, fontWeight: 500, color: statusColor }}>
-              {sub?.status === 'active' ? 'Активна' : 'Нет подписки'}
+              {sub?.status === 'active' ? 'Active' : 'No subscription'}
             </p>
           </div>
           <div style={{ background: '#0c110e', padding: '20px 24px' }}>
-            <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.12em', marginBottom: 8 }}>ОСТАЛОСЬ ДНЕЙ</p>
+            <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.12em', marginBottom: 8 }}>DAYS LEFT</p>
             <p style={{ fontFamily: mono, fontSize: 18, fontWeight: 500, color: '#e8f0ea' }}>
               {daysLeft !== null ? String(daysLeft) : '—'}
             </p>
           </div>
           <div style={{ background: '#0c110e', padding: '20px 24px' }}>
-            <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.12em', marginBottom: 8 }}>ЛИЦЕНЗИОННЫЙ КЛЮЧ</p>
+            <p style={{ fontFamily: mono, fontSize: 10, color: '#5a7060', letterSpacing: '0.12em', marginBottom: 8 }}>LICENSE KEY</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <p style={{ fontFamily: mono, fontSize: 14, fontWeight: 500, color: '#9ab09e', letterSpacing: '0.06em' }}>
                 {sub?.license_key ? (showKey ? sub.license_key : maskedKey) : '—'}
@@ -81,7 +81,7 @@ export default function Dashboard() {
                   onMouseEnter={e => { e.currentTarget.style.borderColor = '#22c55e'; e.currentTarget.style.color = '#22c55e' }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = '#1f2e22'; e.currentTarget.style.color = '#5a7060' }}
                 >
-                  {showKey ? 'СКРЫТЬ' : 'ПОКАЗАТЬ'}
+                  {showKey ? 'HIDE' : 'SHOW'}
                 </button>
               )}
             </div>
@@ -89,12 +89,12 @@ export default function Dashboard() {
         </div>
 
         <div style={{ background: '#0c110e', border: '1px solid #1f2e22', padding: '24px' }}>
-          <p style={{ fontFamily: mono, fontSize: 10, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 16 }}>— ИНФОРМАЦИЯ ОБ АККАУНТЕ</p>
+          <p style={{ fontFamily: mono, fontSize: 10, color: '#22c55e', letterSpacing: '0.15em', marginBottom: 16 }}>— ACCOUNT INFORMATION</p>
           {[
             { key: 'Email', val: email || '...' },
-            { key: 'Аккаунт создан', val: createdAt || '...' },
-            { key: 'Последний вход', val: 'Сегодня' },
-            { key: 'Тип подписки', val: sub?.plan ?? 'Нет' },
+            { key: 'Account Created', val: createdAt || '...' },
+            { key: 'Last Login', val: 'Today' },
+            { key: 'Subscription Type', val: sub?.plan ?? 'None' },
           ].map(row => (
             <div key={row.key} style={{ display: 'flex', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #1a2618' }}>
               <span style={{ fontFamily: mono, fontSize: 12, color: '#5a7060', width: 180 }}>{row.key}</span>
