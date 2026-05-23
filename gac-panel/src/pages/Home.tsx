@@ -165,6 +165,34 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Средняя часть — ключевые фичи */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, opacity: 0, animation: 'fade-up .8s .5s forwards' }}>
+            {[
+              { num: '01', title: 'Kernel-level Protection', desc: 'Operates at Ring 0, inaccessible to userspace cheats' },
+              { num: '02', title: 'Real-time Scanning', desc: 'Memory integrity and process monitoring on the fly' },
+              { num: '03', title: 'Behavioral Analysis', desc: 'Statistical models detect aimbots and speedhacks' },
+              { num: '04', title: 'Server Verification', desc: 'All client data verified server-side instantly' },
+              { num: '05', title: 'BattleEye Compatible', desc: 'Works alongside BattleEye for layered protection' },
+            ].map(f => (
+              <div
+                key={f.num}
+                style={{ display: 'flex', alignItems: 'flex-start', gap: 14, maxWidth: 280 }}
+              >
+                <span style={{ fontFamily: 'DM Mono, monospace', fontSize: 10, color: '#22c55e', opacity: 0.5, marginTop: 3, flexShrink: 0 }}>
+                  {f.num}
+                </span>
+                <div>
+                  <div style={{ fontFamily: 'DM Mono, monospace', fontSize: 12, color: '#e8f0ea', marginBottom: 3, letterSpacing: '0.04em' }}>
+                    {f.title}
+                  </div>
+                  <div style={{ fontFamily: 'DM Mono, monospace', fontSize: 11, color: '#5a7060', lineHeight: 1.5 }}>
+                    {f.desc}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Правая часть — GAC окно */}
           <div style={{ opacity: 0, animation: 'fade-up .8s .8s forwards' }}>
             <div className="h-gac-window" style={{ borderRadius: 16, overflow: 'hidden' }}>
